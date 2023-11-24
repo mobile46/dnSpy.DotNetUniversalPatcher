@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\dnSpy\DnSpyCommon.props" />
+
+  <PropertyGroup>
+    <Authors>Mobile46</Authors>
+    <Company>$(Authors)</Company>
+    <Copyright>Copyright © 2019-$([System.DateTime]::UtcNow.Year) $(Company)</Copyright>
+
+    <AssemblyName>dnSpy.DotNetUniversalPatcher.x</AssemblyName>
+    <Version>1.0.0.0</Version>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\dnSpy\dnSpy\dnSpy.Contracts.DnSpy\dnSpy.Contracts.DnSpy.csproj" />
+    <ProjectReference Include="..\dnSpy\dnSpy\dnSpy.Contracts.Logic\dnSpy.Contracts.Logic.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="$(TargetPath)"
+          DestinationFolder="..\dnSpy\dnSpy\bin\$(Configuration)\$(TargetFramework)\bin\Extensions\"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
